@@ -109,4 +109,24 @@ public class RegularExpressionsTest {
         String expected = "abs lmn";
         assertEquals(expected, Strings.stringWithJavaNames(names));
     }
+    @Test
+    void isArithmeticExpressionTest() {
+         assertTrue(isArithmeticExpression("2*(2-1)*3"));
+        assertTrue(isArithmeticExpression("2*3"));
+        assertTrue(isArithmeticExpression("5*(3+(2/2))"));
+        
+        assertFalse(isArithmeticExpression(""));
+        assertFalse(isArithmeticExpression(" + "));
+        assertFalse(isArithmeticExpression("++"));
+        assertFalse(isArithmeticExpression("abc"));
+        assertFalse(isArithmeticExpression("1 + 1 -"));
+        assertFalse(isArithmeticExpression("1 1+1"));
+        assertFalse(isArithmeticExpression("()"));
+        assertFalse(isArithmeticExpression("(1+1"));
+        assertFalse(isArithmeticExpression("(1+1("));
+        assertFalse(isArithmeticExpression("(1)+1)"));
+        assertFalse(isArithmeticExpression("int+number"));
+        assertFalse(isArithmeticExpression("a b+c"));
+
+    }
 }

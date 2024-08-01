@@ -62,15 +62,25 @@ public class Strings {
         return string.matches(javaVariable()) && Arrays.binarySearch(keyWords, string) < 0;
 }
 public static boolean isArithmeticExpression(String expr) {
-    //TODO
-    //1. brackets
-    //right position of open / close bracket is matter of regex
-    //matching between open and close bracket is matter of the method you are supposed to write
-    //based on a counter. If counter is negative - no matching;
-    // if at ending up going through a string the counter doesn't equal 0 - no matching
-    //matching may be only in one case: at the ending up of going the counter will be 0
-    // Operator - regular expression for one out of 4 arithemetic operators [*/+-]
-    //Operand may be either Java variable name or number (better any)
-    return false;
-}
+    return rightSymbols(expr) && isBrakes(expr);
+   }
+
+   public static boolean rightSymbols(String expr) {
+       return expr.matches("^(?!.*[+\\-*/]{2})(?!.*\\(\\)).*$") && expr.matches("[\\d()+*/-]+$");
+   }
+   public static boolean isBrakes(String expr) {
+       String [] parts = expr.split("");
+       int i = 0;
+       int countBraket = 0;
+       while (i < parts.length) {
+           if (parts[i].equals("(") ) {
+               countBraket++;
+           } else if (parts[i].equals(")")) {
+               countBraket--;
+           }
+           i++;
+       }
+       return  countBraket == 0 ? true : false;
+   }
+
 }
