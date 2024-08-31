@@ -11,17 +11,12 @@ public class Strings {
                     "new", "null", "package", "private", "protected", "public",
                     "return", "short", "static", "strictfp", "super", "switch",
                     "synchronized", "this", "throw", "throws", "transient", "true",
-                    "try", "void", "volatile", "while" };
+                    "try", "void", "volatile", "while" }; // массив ключевых слов
     public static String firstName() {
-        //regex for strings starting with capital letter and rest as lowercase letters
-        //minimal length is 5 letters
-        return "[A-Z][a-z]{4,}";
+               return "[A-Z][a-z]{4,}"; // допустимы  буквенные символы 1 заглавныые и строчные длинной 4
     }
     public static String javaVariable() {
-        //TODO
-        //regular expression for testing syntax of Java veriable names
-        //only ACII symbols are allowed
-        return "((?!_$)[a-zA-Z$_][\\w$]*)";
+              return "((?!_$)[a-zA-Z$_][\\w$]*)";
     }
     public static String number0_300() {
        
@@ -36,8 +31,8 @@ public class Strings {
         return String.format("%s(\\.%s){3}", octetExpr, octetExpr);
     }
     public static String stringWithJavaNames(String names) {
-       String [] tokens = names.split("\\s+");
-       int i = getJavaNameIndex(tokens, -1);
+       String [] tokens = names.split("\\s+"); // делаем массив из строки удаляя пробел который будет разделителем
+        int i = getJavaNameIndex(tokens, -1);
        String res = "";
        if (i >= 0) {
          res = tokens[i];
@@ -59,14 +54,14 @@ public class Strings {
 
     private static boolean isJavaName(String string) {
         
-        return string.matches(javaVariable()) && Arrays.binarySearch(keyWords, string) < 0;
+        return string.matches(javaVariable()) && Arrays.binarySearch(keyWords, string) < 0; // matches str.matches(regex) Указывает, соответствует ли эта строка заданному регулярному выражению. и ищем совпадение  бинарным поиском
 }
-public static boolean isArithmeticExpression(String expr) {
+public static boolean isArithmeticExpression(String expr) { //если соответствует регуляркам и скобки парные
     return rightSymbols(expr) && isBrakes(expr);
    }
 
    public static boolean rightSymbols(String expr) {
-       return expr.matches("^(?!.*[+\\-*/]{2})(?!.*\\(\\)).*$") && expr.matches("[\\d()+*/-]+$");
+       return expr.matches("^(?!.*[+\\-*/]{2})(?!.*\\(\\)).*$") && expr.matches("[\\d()+*/-]+$"); // проверяем соответствие регуляркам
    }
    public static boolean isBrakes(String expr) {
        String [] parts = expr.split("");
@@ -80,7 +75,7 @@ public static boolean isArithmeticExpression(String expr) {
            }
            i++;
        }
-       return  countBraket == 0 ? true : false;
+       return  countBraket == 0 ? true : false; // если каунтер равен нулю то скобки парные
    }
 
 }
